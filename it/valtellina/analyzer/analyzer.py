@@ -35,7 +35,12 @@ class Analyzer:
 
     # Missing values
     def missing_values(self):
-        print(self.df.isnull().sum())
+        missing = self.df.isnull().sum()
+        total = len(self.df)
+        return {
+            "missing_values": missing.to_dict(),
+            "missing_percentage": (missing / total * 100).to_dict()
+        }
 
     # Imputo Unknown
     def impute_categorical_unknown(self):
@@ -51,11 +56,13 @@ class Analyzer:
         before = self.df.shape[0]
         self.df = self.df.drop_duplicates()
         after = self.df.shape[0]
-        print(f"Duplicati trovati e rimossi: {before - after}")
+        removed = before - after
+        return {
+            "before": before,
+            "after": after,
+            "removed_duplicates": removed
+        }
 
-    # ----------------------------
-    # OUTLIERS (IQR METHOD)
-    # ----------------------------
 
     def prepare_target(self, target):
         self.df[target] = self.df[target].map({'e': 0, 'p': 1})

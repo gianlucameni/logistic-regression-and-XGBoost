@@ -1,4 +1,4 @@
-FROM python:3.11_slim
+FROM python:3.11-slim
 WORKDIR /regressione_lineare
 COPY . .
 RUN pip install -r requirements.txt

@@ -23,6 +23,8 @@ df.remove_duplicates() # 0 duplicati trovati e rimossi
 #grf.plot_categorical("cap-shape", "poisonous")
 #grf.plot_target("poisonous") # --> target bilanciato
 
+
+
 # Trasformiamo il target in binario 0-1. edible 0, poisonous 1
 df.prepare_target("poisonous")
 
