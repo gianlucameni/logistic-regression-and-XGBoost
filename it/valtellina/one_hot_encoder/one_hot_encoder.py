@@ -1,7 +1,7 @@
 from sklearn.preprocessing import OneHotEncoder
 import pandas as pd
 
-class OHEncoder():
+class OHEncoder:
     def __init__(self, X_train, X_test):
         self.X_train = X_train
         self.X_test = X_test
