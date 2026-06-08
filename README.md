@@ -49,54 +49,98 @@ docker --version
 
 ### Utilizzo di Docker
 
-1. Crea una build da linea di comando:
+1. Costruisci l'immagine Docker da linea di comando:
    ```bash
    docker build -t mushroom-analyzer .
    ```
    
-2. Controlla le informazioni del container creato con il comando:
+2. Si possono controllare le informazioni dell'immagine appena creata con il comando:
+   ```bash
+   docker image ls
+   ```
+
+3. Costruisci e avvia il container da linea di comando (copiando questo comando, verrà chiamato "mushroom-test"):
+   ```bash
+   docker run -d --name mushroom-test -p 5000:5000 mushroom-analyzer
+   ```
+   Se l'operazione è andata a buon fine è possibile vedere lo stavo attivo del container tramite il comando:
    ```bash
    docker ps
    ```
 
-3. Avvia l'applicazione da linea di comando, aggiungendo in fondo l'id del container:
-   ```bash
-   docker run -d --name mushroom-analyzer -p 5000:5000 
-   ```
-
-4. Accedi all'applicazione tramite il tuo browser all'indirizzo:
+4. Accedi all'applicazione (nella sua route home) tramite il tuo browser all'indirizzo:
    ```
    http://127.0.0.1:5000/
    ```
 ## Utilizzo dell'API
 
-L'API è consultabile attraverso dei browser plug-in, tra cui:
+L'API è consultabile direttamente da browser.
+
+Se dovesse servire, è possibile installare dei plug-in, tra cui:
 
 - Rest-Client (Chrome): [download](https://chromewebstore.google.com/detail/rest-client/oienkoejnhkbcibhdnpjoemdnmiokgah)
+- Rested (Firefox): [download](https://addons.mozilla.org/en-US/firefox/addon/rested/)
+
+L'utilizzo dei plug-in non permette però la restituzione delle immagini, facendo risultare "strana" la risposta di alcuni endpoint
 
 ## Funzioni di MCA
 
-MCA è provvisto di diversi endpoint, consultabili nella route **intro**.
+MCA è provvisto di diversi endpoint GET, consultabili nella route **home**.
+```
+http://127.0.0.1:5000/
+```
 Le funzionalità dell'API sono le seguenti:
 
 ### Missing Values
 
-Endpoint di tipo GET che permette di visualizzare la quantità di missing values presente nel dataset
+Endpoint che permette di visualizzare la quantità di missing values presente nel dataset
 ```
 http://127.0.0.1:5000/api/missing-values
 ```
 
 ### Cleaning Data
 
-Endpoint di tipo GET che permette di pulire il dataset riempiendo i valori nulli e droppando le colonne in eccesso per la creazione dei modelli
+Endpoint che permette di pulire il dataset riempiendo i valori nulli e droppando le colonne in eccesso per la creazione dei modelli
 ```
 http://127.0.0.1:5000/api/cleaning-data
+```
+
+### Distribution Target
+
+Endpoint che restituisce la distribuzione della variabile target "poisonous"
+```
+http://127.0.0.1:5000/api/distribution-target
+```
+
+### Correlation Target
+
+Endpoint che restituisce la correlazione delle features (trattate con one-hot-encoded) con il target
+```
+http://127.0.0.1:5000/api/correlation-target
+```
+
+### Distribution Feature
+
+Endpoint che restituisce la distribuzione della feature passata in input dopo l'ultimo " / "
+```
+http://127.0.0.1:5000/api/distribution-feature/<feature>
+```
+
+Un esempio corretto è il seguente:
+```
+http://127.0.0.1:5000/api/distribution-feature/odor
 ```
 
 ### Logistic Regression
 
 Endpoint che stampa a video le metriche della logistic regression eseguita sul dataset ripulito
+```
+http://127.0.0.1:5000/api/logistic-regression
+```
 
 ### XGBoost
 
 Endpoint che stampa a video le metriche di XGBoost eseguito sul dataset ripulito
+```
+http://127.0.0.1:5000/api/XGBoost
+```
