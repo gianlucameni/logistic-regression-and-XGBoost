@@ -1,6 +1,9 @@
 # Mushroom Classification Analyzer
 
-Mushroom Classification Analyzer è un'API in Flask progettata per analizzare il dataset Mushroom e prevedere se un fungo è commestibile o velenoso utilizzando modelli di Machine Learning, in particolare Logistic Regression e XGBoost.
+Mushroom Classification Analyzer è un'API in Flask 
+progettata per analizzare il [dataset Mushroom](https://archive.ics.uci.edu/dataset/73/mushroom) e 
+prevedere se un fungo è commestibile o velenoso utilizzando modelli di Machine Learning, 
+in particolare Logistic Regression e XGBoost.
 
 Il sistema include una pipeline completa di preprocessing dei dati categorici (One-Hot Encoding), analisi esplorativa del dataset e training di modelli supervisionati per la classificazione binaria.
 
@@ -65,3 +68,35 @@ docker --version
    ```
    http://127.0.0.1:5000/
    ```
+## Utilizzo dell'API
+
+L'API è consultabile attraverso dei browser plug-in, tra cui:
+
+- Rest-Client (Chrome): [download](https://chromewebstore.google.com/detail/rest-client/oienkoejnhkbcibhdnpjoemdnmiokgah)
+
+## Funzioni di MCA
+
+MCA è provvisto di diversi endpoint, consultabili nella route **intro**.
+Le funzionalità dell'API sono le seguenti:
+
+### Missing Values
+
+Endpoint di tipo GET che permette di visualizzare la quantità di missing values presente nel dataset
+```
+http://127.0.0.1:5000/api/missing-values
+```
+
+### Cleaning Data
+
+Endpoint di tipo GET che permette di pulire il dataset riempiendo i valori nulli e droppando le colonne in eccesso per la creazione dei modelli
+```
+http://127.0.0.1:5000/api/cleaning-data
+```
+
+### Logistic Regression
+
+Endpoint che stampa a video le metriche della logistic regression eseguita sul dataset ripulito
+
+### XGBoost
+
+Endpoint che stampa a video le metriche di XGBoost eseguito sul dataset ripulito
