@@ -1,6 +1,8 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
+import base64
+import io
 
 class Graphs:
     def __init__(self, df):
@@ -20,7 +22,14 @@ class Graphs:
         ax[1].legend(title=target)
 
         plt.tight_layout()
-        plt.show()
+        #plt.show()
+        buf = io.BytesIO()
+        plt.savefig(buf, format="png", bbox_inches="tight")
+        buf.seek(0)
+        #img_base64 = base64.b64encode(buf.read()).decode("utf-8")
+        plt.close()
+
+        return buf
 
     def plot_target(self, col):
         fig, ax = plt.subplots(1, 1, figsize=(14, 5))
@@ -29,7 +38,14 @@ class Graphs:
         sns.countplot(x=col, data=self.df, ax=ax)
         ax.set_title(f"Count plot - {col}")
 
-        plt.show()
+        #plt.show()
+        buf = io.BytesIO()
+        plt.savefig(buf, format="png", bbox_inches="tight")
+        buf.seek(0)
+        img_base64 = base64.b64encode(buf.read()).decode("utf-8")
+        plt.close()
+
+        return img_base64
 
     def correlation_target(self, y_train):
         # copia dati + target
@@ -51,4 +67,12 @@ class Graphs:
 
         plt.title("Top 20 correlazioni con il target")
         plt.xlabel("Correlazione")
-        plt.show()
+        #plt.show()
+
+        buf = io.BytesIO()
+        plt.savefig(buf, format="png", bbox_inches="tight")
+        buf.seek(0)
+        img_base64 = base64.b64encode(buf.read()).decode("utf-8")
+        plt.close()
+
+        return img_base64

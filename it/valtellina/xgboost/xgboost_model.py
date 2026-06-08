@@ -39,12 +39,9 @@ class XGBoostModel:
 
         y_pred = self.predict(X)
 
-        print("Accuracy :", accuracy_score(y, y_pred))
-        print("Precision:", precision_score(y, y_pred))
-        print("Recall   :", recall_score(y, y_pred))
-        print("F1-score :", f1_score(y, y_pred))
-
-        print("\nConfusion Matrix:\n", confusion_matrix(y, y_pred))
-
-        print("\nClassification Report:\n")
-        print(classification_report(y, y_pred))
+        return {
+            "accuracy": accuracy_score(y, y_pred),
+            "precision": precision_score(y, y_pred),
+            "recall": recall_score(y, y_pred),
+            "f1_score": f1_score(y, y_pred)
+        }

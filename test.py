@@ -8,6 +8,8 @@ from it.valtellina.xgboost.xgboost_model import XGBoostModel
 # creiamo oggetto che contiene il df
 df = Analyzer()
 
+print(df.df.columns)
+
 #df.show_head()
 #df.overview() # --> stalk-root ha 2.48k null
 df.missing_values()
@@ -21,6 +23,7 @@ df.remove_duplicates() # 0 duplicati trovati e rimossi
 # stampiamo grafici count plot
 #grf = Graphs(df.df)
 #grf.plot_categorical("cap-shape", "poisonous")
+
 #grf.plot_target("poisonous") # --> target bilanciato
 
 
